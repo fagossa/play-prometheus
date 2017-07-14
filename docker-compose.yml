@@ -9,6 +9,14 @@ networks:
     driver: bridge
 
 services:
+  play-app:
+    image: "fagossa/play-prometheus"
+    container_name: play-prometheus
+    ports:
+     - "9000:9000"
+    networks:
+      - back-tier
+
   prometheus:
     image: "prom/prometheus"
     container_name: prometheus
@@ -25,15 +33,9 @@ services:
     networks:
       - back-tier
 
-  play-app:
-    image: "fagossa/play-prometheus"
-    ports:
-     - "9000:9000"
-    networks:
-      - back-tier
-
   cadvisor:
     image: google/cadvisor
+    container_name: cadvisor
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -46,6 +48,7 @@ services:
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     depends_on:
       - prometheus
     ports:
