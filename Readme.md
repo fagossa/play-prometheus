@@ -57,7 +57,7 @@ The application inside the container is no able to start as the play! app always
 
 In order to verify that prometheus was able to connect to out application you can check `http://localhost:9090/targets`
 
-![Grafana Dashboard](https://github.com/fagossa/play-prometheus/blob/version-2/images/targets.png)
+![Grafana Dashboard](https://github.com/fagossa/play-prometheus/blob/master/images/targets.png)
 
 Theoretically you should have:
 - a target for our play application
@@ -83,7 +83,7 @@ Now we need to create the Prometheus Datasource in order to connect Grafana to P
   - Go to Data Sources
   - Enter the following data
 
-![AddDataSource](https://github.com/fagossa/play-prometheus/blob/version-2/images/targets.png)
+![AddDataSource](https://github.com/fagossa/play-prometheus/blob/master/images/datasource.png)
 
 ### Import the Dashboard
 
@@ -94,6 +94,6 @@ Import the file `Grafana_Dashboard.json`
 
 Your resulting Dashboard should be similar to this
 
-![AddDataSource](https://github.com/fagossa/play-prometheus/blob/version-2/images/result.png)
+![AddDataSource](https://github.com/fagossa/play-prometheus/blob/master/images/result.png)
 
 Don't forget to go to `http://localhost:9000/` and check how your dashboards changes.
