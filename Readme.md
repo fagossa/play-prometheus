@@ -74,6 +74,12 @@ Theoretically you should have:
 - a target for our play application
 - a target for prometheus itself
 
+Before testing the integration between prometheus and grafana you can verify your metrics by going to `http://localhost:9090/graph`.
+
+You should be able to get something like this
+
+![graph](https://github.com/fagossa/play-prometheus/blob/master/images/graph.png)
+
 ## Grafana
 
 The Dashboard is now available at `http://localhost:3000` using the following credentials
