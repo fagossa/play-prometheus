@@ -1,6 +1,6 @@
 # Playframework application + prometheus + grafana
 
-This is just a example of how to monitor a playframework application using:
+This is just an example of how to monitor a playframework application using:
 - prometheus client
 - prometheus
 - grafana
