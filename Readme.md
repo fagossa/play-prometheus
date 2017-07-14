@@ -1,4 +1,4 @@
-# playframework application + prometheus
+# Playframework application + prometheus + grafana
 
 This is just a example of how to monitor a playframework application using:
 - prometheus client
@@ -9,7 +9,9 @@ This is just a example of how to monitor a playframework application using:
 
 To run everything you just need `docker`.
 
-## Starting everything
+## How to starting everything?
+
+> Before running this command be aware that the docker files are quite heavy, so this could take a while
 
 ```
 docker-compose up -d
@@ -19,11 +21,17 @@ docker-compose up -d
 
 ![Containers](https://github.com/fagossa/play-prometheus/blob/master/images/containers.png)
 
+Which means that we have now 4 running containers:
+- Grafana
+- CAdvisor
+- Our play application
+- Prometheus
+
 ## The play application
 
 The play application is available at `http://localhost:9000/`.
 
-The general idea is that the application has a _count metric_
+The general idea is that the application has a _count metric_ for a particular url
 
 ```
 val requests = Counter.build()
@@ -45,13 +53,16 @@ class HomeController @Inject()(visitsCounter: IndexAccessCounter) extends Contro
 
 }
 ```
+
 Just in case, don't forget to add the following script to your `build.sbt`
+
 ```
 javaOptions in Universal ++= Seq(
   "-Dpidfile.path=/dev/null"
 )
 ```
-The application inside the container is no able to start as the play! app always has the same PID.
+
+This is a workaroung as the application inside the container is no able to restart because the play app always has the same PID.
 
 ## Prometheus targets
 
@@ -65,13 +76,12 @@ Theoretically you should have:
 
 ## Grafana
 
-The Dashboard is now available at `http://localhost:3000` using the following
-credentials
+The Dashboard is now available at `http://localhost:3000` using the following credentials
 
 - username: admin
 - password: admin
 
-The password is stored in the `config.monitoring` env file
+The password is stored in the `config.monitoring` env file.
 
 Once logged in you need to:
 
