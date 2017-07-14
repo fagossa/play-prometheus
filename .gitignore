@@ -1,3 +1,5 @@
-play-prometheus/
-
-
+target/
+project/target
+.idea
+native/
+*.log
