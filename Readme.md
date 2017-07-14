@@ -17,7 +17,7 @@ docker-compose up -d
 
 ....and everything should be up and running. Something similar to this image
 
-![Containers](https://github.com/fagossa/play-prometheus/blob/version-2/images/containers.png)
+![Containers](https://github.com/fagossa/play-prometheus/blob/master/images/containers.png)
 
 ## The play application
 
