@@ -48,94 +48,179 @@
   "sharedCrosshair": true,
   "rows": [
     {
-			"collapse": false,
-			"height": "250px",
-			"panels": [{
-				"aliasColors": {},
-				"bars": false,
-				"dashLength": 10,
-				"dashes": false,
-				"datasource": null,
-				"fill": 1,
-				"id": 1,
-				"legend": {
-					"alignAsTable": false,
-					"avg": true,
-					"current": false,
-					"hideEmpty": false,
-					"hideZero": false,
-					"max": true,
-					"min": true,
-					"rightSide": true,
-					"show": true,
-					"total": false,
-					"values": true
-				},
-				"lines": true,
-				"linewidth": 1,
-				"links": [],
-				"nullPointMode": "null",
-				"percentage": false,
-				"pointradius": 5,
-				"points": false,
-				"renderer": "flot",
-				"seriesOverrides": [],
-				"spaceLength": 10,
-				"span": 12,
-				"stack": false,
-				"steppedLine": false,
-				"targets": [{
-					"expr": "play_requests_total",
-					"format": "time_series",
-					"intervalFactor": 2,
-					"legendFormat": "clicks",
-					"metric": "play_requests_total",
-					"refId": "A",
-					"step": 4
-				}],
-				"thresholds": [],
-				"timeFrom": null,
-				"timeShift": null,
-				"title": "Visits to to the play app",
-				"tooltip": {
-					"shared": true,
-					"sort": 0,
-					"value_type": "individual"
-				},
-				"transparent": false,
-				"type": "graph",
-				"xaxis": {
-					"buckets": null,
-					"mode": "time",
-					"name": null,
-					"show": true,
-					"values": []
-				},
-				"yaxes": [{
-						"format": "short",
-						"label": null,
-						"logBase": 1,
-						"max": null,
-						"min": null,
-						"show": true
-					},
-					{
-						"format": "short",
-						"label": null,
-						"logBase": 1,
-						"max": null,
-						"min": null,
-						"show": true
-					}
-				]
-			}],
-			"repeat": null,
-			"repeatIteration": null,
-			"repeatRowId": null,
-			"showTitle": false,
-			"title": "Dashboard Row",
-			"titleSize": "h6"
-		},
+      "collapse": false,
+      "height": 257,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "alignAsTable": false,
+            "avg": true,
+            "current": false,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "play_requests_total",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "clicks",
+              "metric": "play_requests_total",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Visits to to the play app",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": false,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": true,
+            "thresholdLabels": true,
+            "thresholdMarkers": true
+          },
+          "id": 10,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "minSpan": null,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 2,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "play_current_users",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Connected users",
+              "metric": "play_current_users",
+              "refId": "A",
+              "step": 60
+            }
+          ],
+          "thresholds": "",
+          "title": "Logged users",
+          "transparent": false,
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
     {
       "collapse": false,
       "editable": true,
