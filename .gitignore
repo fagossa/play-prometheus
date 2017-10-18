@@ -1,2 +1,5 @@
-play-prometheus/
-*.idea/
+.idea/
+target/
+*.class
+project/project/
+project/target/

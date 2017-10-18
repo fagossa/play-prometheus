@@ -1,0 +1,1 @@
+dockerExposedPorts := Seq(9000)
