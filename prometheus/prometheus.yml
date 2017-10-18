@@ -5,6 +5,9 @@ global:
   external_labels:
     monitor: 'monitoring-play-app'
 
+rule_files:
+  - "/etc/prometheus/alert.rules"
+
 scrape_configs:
   - job_name: 'prometheus'
 

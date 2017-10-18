@@ -22,14 +22,31 @@ services:
     container_name: prometheus
     volumes:
      - $PWD/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+     - $PWD/prometheus/alert.rules:/etc/prometheus/alert.rules
      - prometheus_data:/prometheus
     command:
      - '-config.file=/etc/prometheus/prometheus.yml'
      - '-storage.local.path=/prometheus'
+     - '-alertmanager.url=http://alertmanager:9093'
     expose:
      - 9090
     ports:
      - "9090:9090"
+    networks:
+      - back-tier
+
+  alertmanager:
+    image: "prom/alertmanager"
+    container_name: alertmanager
+    volumes:
+     - $PWD/prometheus/alertmanager.yml:/etc/prometheus/alertmanager.yml
+     - $PWD/prometheus/alertmessage.tmpl:/etc/templates/alertmessage.tmpl
+    command:
+     - '-config.file=/etc/prometheus/alertmanager.yml'
+    expose:
+     - 9093
+    ports:
+     - "9093:9093"
     networks:
       - back-tier
 

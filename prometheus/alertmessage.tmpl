@@ -1,0 +1,10 @@
+{{ define "__slack_text" }}
+{{ range .Alerts }}{{ .Annotations.description}}{{ end }}
+{{ end }}
+
+{{ define "__slack_title" }}
+{{ range .Alerts }} :scream: {{ .Annotations.summary}} :scream: {{ end }}
+{{ end }}
+
+{{ define "slack.default.text" }}{{ template "__slack_text" . }}{{ end }}
+{{ define "slack.default.title" }}{{ template "__slack_title" . }}{{ end }}
