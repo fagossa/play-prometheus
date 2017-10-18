@@ -33,6 +33,20 @@ services:
     networks:
       - back-tier
 
+  alertmanager:
+    image: "prom/alertmanager"
+    container_name: alertmanager
+    volumes:
+     - $PWD/prometheus/alertmanager.yml:/etc/prometheus/alertmanager.yml
+    command:
+     - '-config.file=/etc/prometheus/alertmanager.yml'
+    expose:
+     - 9090
+    ports:
+     - "9090:9090"
+    networks:
+      - back-tier
+
   cadvisor:
     image: google/cadvisor
     container_name: cadvisor
