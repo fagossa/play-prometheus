@@ -1,6 +1,9 @@
 ALERT low_connected_users
   IF play_current_users < 2
   FOR 30s
+  LABELS {
+    severity = "warning"
+  }
   ANNOTATIONS {
       summary = "Instance {{ $labels.instance }} under lower load",
       description = "{{ $labels.instance }} of job {{ $labels.job }} is under lower load.",
