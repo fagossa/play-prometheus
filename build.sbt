@@ -20,16 +20,16 @@ lazy val root = (project in file("."))
     kamon.SystemMetrics,
     kamon.Scala,
 
-    akka.http,
-    akka.slf4j,
-    akka.httpCore,
+    akka.Http,
+    akka.Slf4j,
+    akka.HttpCore,
 
-    log.logbackClassic,
-    log.logbackCore,
-    log.log4jOverSlf4j,
-    log.logstashLogback,
-    log.janino,
-    log.scalaLogging
+    log.LogbackClassic,
+    log.LogbackCore,
+    log.Log4jOverSlf4j,
+    log.LogstashLogback,
+    log.Janino,
+    log.ScalaLogging
   ))
   .settings(
     parallelExecution in Test := false
