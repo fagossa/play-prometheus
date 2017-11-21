@@ -32,9 +32,15 @@ lazy val root = (project in file("."))
     log.ScalaLogging
   ))
   .settings(
-    parallelExecution in Test := false
+    parallelExecution in Test := false,
+    aspectjSettings,
+    fork in run := true //ensure that the JVM is forked
   )
 
+  // Here we are effectively adding the `-javaagent` JVM startup
+  // option with the location of the AspectJ Weaver provided by
+  // the sbt-aspectj plugin.
+javaOptions in run <++= {AspectjKeys.weaverOptions in Aspectj}
 
 import sbt.Tests._
 def singleTestPerJvm(tests: Seq[TestDefinition], jvmSettings: Seq[String]): Seq[Group] =
@@ -44,5 +50,3 @@ def singleTestPerJvm(tests: Seq[TestDefinition], jvmSettings: Seq[String]): Seq[
       tests = Seq(test),
       runPolicy = SubProcess(ForkOptions(runJVMOptions = jvmSettings)))
   }
-
-//bashScriptExtraDefines += s"""addJava "-Dkamon.auto-start=true""""

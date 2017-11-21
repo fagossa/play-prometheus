@@ -4,7 +4,7 @@ resolvers ++= Seq(
   Resolver.bintrayIvyRepo("kamon-io", "sbt-plugins")
 )
 
-addSbtPlugin("io.kamon" % "sbt-aspectj-runner" % "1.0.3")
+addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % "0.10.0")
 
 addSbtPlugin("com.geirsson" %% "sbt-scalafmt" % "0.4.10")
 
