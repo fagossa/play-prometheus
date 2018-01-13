@@ -6,8 +6,10 @@ resolvers ++= Seq(
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-aspectj" % "0.10.0")
 
-addSbtPlugin("com.geirsson" %% "sbt-scalafmt" % "0.4.10")
+addSbtPlugin("com.lucidchart" % "sbt-scalafmt" % "1.10")
 
 addSbtPlugin("io.gatling" % "gatling-sbt" % "2.2.1")
 
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.4")
+
+addSbtPlugin("io.spray" % "sbt-revolver" % "0.9.1")
