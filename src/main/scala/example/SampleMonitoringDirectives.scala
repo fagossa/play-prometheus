@@ -8,14 +8,16 @@ import scala.concurrent.duration._
 
 trait SampleMonitoringDirectives {
 
-  def increaseMetricNamed(name: String): Directive0 = mapRequest { req =>
-    val myMMCounter = Kamon.metrics.minMaxCounter(name, refreshInterval = 500 milliseconds)
+  implicit val value = scala.language.postfixOps
+
+  val myMMCounter = Kamon.metrics.minMaxCounter("play_current_users", refreshInterval = 500 milliseconds)
+
+  def increaseCurrentUsers: Directive0 = mapRequest { req =>
     myMMCounter.increment()
     req
   }
 
-  def decreaseMetricNamed(name: String): Directive0 = mapRequest { req =>
-    val myMMCounter = Kamon.metrics.minMaxCounter(name, refreshInterval = 500 milliseconds)
+  def decreaseCurrentUsers: Directive0 = mapRequest { req =>
     myMMCounter.decrement()
     req
   }
