@@ -1,115 +1,55 @@
-# Playframework application + prometheus + grafana
+# Akka-http + influxdb + grafana
 
-This is just a example of how to monitor a playframework application using:
-- prometheus client
-- prometheus
+This repository shows how to monitor an `akka-http` application.
+
+## Using JMX
+- kamon-jmx
+- jmc (present in the jdk)
+
+## Using influxdb
+
+The following tools are used
+- kamon-influxdb
+- influxdb
 - grafana
 
-## Prerequisites
+### Prerequisites
 
-To run everything you just need `docker`.
-
-## How to starting everything?
-
-> Before running this command be aware that the docker files are quite heavy, so this could take a while
+To run everything you need `docker` and `docker-compose`
 
 ```
 docker-compose up -d
 ```
 
-....and everything should be up and running. Something similar to this image
+### Influxdb
 
-![Containers](https://github.com/fagossa/play-prometheus/blob/master/images/containers.png)
-
-Which means that we have now 4 running containers:
-- Grafana
-- CAdvisor
-- Our play application
-- Prometheus
-
-## The play application
-
-The play application is available at `http://localhost:9000/`.
-
-The general idea is that the application has a _count metric_ for a particular url
+It seems that influxdb needs the db to exist before it starts accepting the metrics
+sent by kamon. So, in order to create them execute the following command
 
 ```
-val requests = Counter.build()
-  .name("play_requests_total")
-  .help("Total requests.")
-  .register()
+curl -POST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE mydb"
 ```
 
-which gets increased each time a user navigates to _/_
+Let's check the contents of our db:
+
+* Connect to the influxdb container
 
 ```
-@Singleton
-class HomeController @Inject()(visitsCounter: IndexAccessCounter) extends Controller {
-
-  def index = Action {
-    visitsCounter.requests.inc()
-    Ok(views.html.index("Your new application is ready."))
-  }
-
-}
+docker exec -it $(docker ps -aqf "name=docker_influxdb_1") /bin/bash
 ```
-
-Just in case, don't forget to add the following script to your `build.sbt`
+* Connect to influxdb
 
 ```
-javaOptions in Universal ++= Seq(
-  "-Dpidfile.path=/dev/null"
-)
+influx
+show databases
+use mydb
+show series
 ```
 
-This is a workaroung as the application inside the container is no able to restart because the play app always has the same PID.
+### The panel in grafana
 
-## Prometheus targets
+The following instruction allows to add the metric `play_current_users` in a new panel
 
-In order to verify that prometheus was able to connect to out application you can check `http://localhost:9090/targets`
-
-![Grafana Dashboard](https://github.com/fagossa/play-prometheus/blob/master/images/targets.png)
-
-Theoretically you should have:
-- a target for our play application
-- a target for prometheus itself
-
-Before testing the integration between prometheus and grafana you can verify your metrics by going to `http://localhost:9090/graph`.
-
-You should be able to get something like this
-
-![graph](https://github.com/fagossa/play-prometheus/blob/master/images/graph.png)
-
-## Grafana
-
-The Dashboard is now available at `http://localhost:3000` using the following credentials
-
-- username: admin
-- password: admin
-
-The password is stored in the `config.monitoring` env file.
-
-Once logged in you need to:
-
-### Create a data source
-
-Now we need to create the Prometheus Datasource in order to connect Grafana to Prometheus
-
-  - Go to Grafana Menu at the top left corner (looks like a fireball)
-  - Go to Data Sources
-  - Enter the following data
-
-![AddDataSource](https://github.com/fagossa/play-prometheus/blob/master/images/datasource.png)
-
-### Import the Dashboard
-
-Import the file `Grafana_Dashboard.json`
-
-
-## Result
-
-Your resulting Dashboard should be similar to this
-
-![AddDataSource](https://github.com/fagossa/play-prometheus/blob/master/images/result.png)
-
-Don't forget to go to `http://localhost:9000/` and check how your dashboards changes.
+```
+SELECT "mean" FROM "kamon-timers" WHERE "category" = 'min-max-counter' AND "entity" = 'play_current_users' AND "hostname" =~ /^$entity$/ AND $timeFilter
+```

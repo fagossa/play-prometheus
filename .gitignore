@@ -3,3 +3,5 @@ project/target
 .idea
 native/
 *.log
+docker/.docker-data/
+docker/influxdb/

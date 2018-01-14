@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  influxdb:
+    image: influxdb:alpine
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    volumes:
+      - .docker-data/influxdb:/var/lib/influxdb
+    environment:
+      INFLUXDB_REPORTING_DISABLED: "false"
+      INFLUXDB_ADMIN_ENABLED: "true"
+      INFLUXDB_HTTP_LOG_ENABLED: "true"
+      INFLUXDB_META_LOGGING_ENABLED: "false"
+      INFLUXDB_DATA_QUERY_LOG_ENABLED: "false"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - .docker-data/grafana:/var/lib/grafana
+    links:
+      - influxdb
