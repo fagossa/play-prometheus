@@ -11,25 +11,29 @@ lazy val root = (project in file("."))
     Seq(
       scalaVersion := "2.11.8",
       testGrouping in Test := singleTestPerJvm((definedTests in Test).value, (javaOptions in Test).value)
-    ))
-  .settings(libraryDependencies ++= Seq(
-    kamon.Core,
-    kamon.JMX,
-    kamon.KamonAutoweave,
-    kamon.Akka,
-    kamon.AkkaHttp,
-    kamon.SystemMetrics,
-    kamon.Scala,
-    akka.Http,
-    akka.Slf4j,
-    akka.HttpCore,
-    log.LogbackClassic,
-    log.LogbackCore,
-    log.Log4jOverSlf4j,
-    log.LogstashLogback,
-    log.Janino,
-    log.ScalaLogging
-  ))
+    )
+  )
+  .settings(
+    libraryDependencies ++= Seq(
+      kamon.Core,
+      kamon.JMX,
+      kamon.KamonAutoweave,
+      kamon.Akka,
+      kamon.AkkaHttp,
+      kamon.SystemMetrics,
+      kamon.Scala,
+      kamon.influxdb,
+      akka.Http,
+      akka.Slf4j,
+      akka.HttpCore,
+      log.LogbackClassic,
+      log.LogbackCore,
+      log.Log4jOverSlf4j,
+      log.LogstashLogback,
+      log.Janino,
+      log.ScalaLogging
+    )
+  )
   .settings(
     parallelExecution in Test := false,
     fmtSettings,

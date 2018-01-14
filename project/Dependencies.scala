@@ -19,6 +19,7 @@ object Dependencies {
     val AkkaHttp       = "io.kamon" %% "kamon-akka-http"       % version
     val SystemMetrics  = "io.kamon" %% "kamon-system-metrics"  % version
     val Scala          = "io.kamon" %% "kamon-scala"           % version
+    val influxdb       = "io.kamon" %% "kamon-influxdb"        % version
   }
 
   object log {
