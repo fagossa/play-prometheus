@@ -18,7 +18,7 @@ services:
       - back-tier
 
   prometheus:
-    image: "prom/prometheus"
+    image: "prom/prometheus:v2.20.1"
     container_name: prometheus
     volumes:
      - $PWD/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -36,7 +36,7 @@ services:
       - back-tier
 
   alertmanager:
-    image: "prom/alertmanager"
+    image: "prom/alertmanager:v0.17.0"
     container_name: alertmanager
     volumes:
      - $PWD/prometheus/alertmanager.yml:/etc/prometheus/alertmanager.yml
